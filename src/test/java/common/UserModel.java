@@ -1,4 +1,4 @@
-package WebPages;
+package common;
 
 import lombok.Data;
 

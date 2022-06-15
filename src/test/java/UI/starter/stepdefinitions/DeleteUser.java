@@ -1,10 +1,10 @@
-package steps.UI;
+package UI.starter.stepdefinitions;
 
-import POM.HomePage;
-import POM.LoginPage;
-import POM.RegisterPage;
-import POM.UsersPage;
-import common.BaseClass;
+
+import WebPages.HomePage;
+import WebPages.LoginPage;
+import WebPages.RegisterPage;
+import WebPages.UsersPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -13,7 +13,9 @@ import io.cucumber.java.en.When;
 import java.util.List;
 import java.util.Map;
 
-public class DeleteUser extends BaseClass {
+import static net.serenitybdd.core.Serenity.getDriver;
+
+public class DeleteUser {
 
     RegisterPage registerPage;
     HomePage homePage;
@@ -24,10 +26,10 @@ public class DeleteUser extends BaseClass {
 
     public DeleteUser() {
 
-        this.registerPage = new RegisterPage(webDriver);
-        this.homePage = new HomePage(webDriver);
-        this.loginPage = new LoginPage(webDriver);
-        this.usersPage = new UsersPage(webDriver);
+        this.registerPage = new RegisterPage(getDriver());
+        this.homePage = new HomePage(getDriver());
+        this.loginPage = new LoginPage(getDriver());
+        this.usersPage = new UsersPage(getDriver());
     }
 
     @And("A user is registered with the following details")

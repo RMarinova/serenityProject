@@ -1,9 +1,10 @@
-package REST.common;
+package REST.actions;
 
-import POM.User;
 import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import common.DefaultUser;
+import common.User;
 import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;

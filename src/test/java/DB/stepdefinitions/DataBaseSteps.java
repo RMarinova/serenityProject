@@ -1,7 +1,7 @@
-package steps.dataBase;
+package DB.stepdefinitions;
 
-import POM.UserModel;
-import common.DBActions;
+import DB.actions.DBActions;
+import common.UserModel;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,7 +10,6 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseSteps {

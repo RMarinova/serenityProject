@@ -1,10 +1,11 @@
-package common;
+package DB.actions;
 
-import POM.UserModel;
+import common.DefaultUser;
+import common.UserModel;
 import io.cucumber.datatable.DataTable;
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
+import net.serenitybdd.core.Serenity;
 import org.modelmapper.ModelMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class DBActions {
     private DBQueries dbQueries = new DBQueries();
     private List<UserModel> usersList = new ArrayList<>();
     private JDBCConnector jdbcConnector;
-    public static String email;
+    private String email;
     private String firstName;
     private String lastName;
 
@@ -59,6 +60,9 @@ public class DBActions {
 
 
         this.email = user.getEmail();
+
+        Serenity.environmentVariables().setProperty("email", user.getEmail());
+
         jdbcConnector.getStatement().executeUpdate(query);
 
     }
@@ -83,25 +87,25 @@ public class DBActions {
         return userModel;
     }
 
-    public String returningEmail(){
+    public String returningEmail() {
         return email;
     }
 
-    public String returningFirstName(){
+    public String returningFirstName() {
         return firstName;
     }
 
-    public String returningLastName(){
+    public String returningLastName() {
         return lastName;
     }
 
-    public List<UserModel> returnUserModelList(){
+    public List<UserModel> returnUserModelList() {
         return usersList;
     }
 
     public void deleteUser() throws SQLException {
 
-        jdbcConnector.getStatement().executeUpdate(dbQueries.deleteUser(email));
+        jdbcConnector.getStatement().executeUpdate(dbQueries.deleteUser(Serenity.environmentVariables().getProperty("email")));
 
     }
 

@@ -1,9 +1,11 @@
-package POM;
+package WebPages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static net.serenitybdd.core.Serenity.getDriver;
 
 public class LoginPage {
     private WebDriver webDriver;
@@ -35,7 +37,6 @@ public class LoginPage {
     }
 
     public void fillInUsername(String username) {
-
         userNameField().clear();
         userNameField().sendKeys(username);
     }

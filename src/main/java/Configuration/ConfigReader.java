@@ -1,4 +1,4 @@
-package dataProviders;
+package Configuration;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,7 +9,7 @@ import java.util.Properties;
 public class ConfigReader {
 
     private Properties properties;
-    private final String propertyFilePath = "src/configs/config.properties";
+    private final String propertyFilePath = "serenity.properties";
 
 
     public ConfigReader() {

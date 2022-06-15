@@ -1,6 +1,6 @@
-package REST.common;
+package REST.actions;
 
-import dataProviders.ConfigReader;
+import Configuration.ConfigReader;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;

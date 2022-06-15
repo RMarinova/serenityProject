@@ -1,7 +1,11 @@
-package common;
+package DB.actions;
 
-import dataProviders.ConfigReader;
-import java.sql.*;
+
+import Configuration.ConfigReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class JDBCConnector {
 
@@ -11,6 +15,7 @@ public class JDBCConnector {
     public JDBCConnector() throws SQLException {
 
         configReader = new ConfigReader();
+
 
         connection = DriverManager.getConnection(configReader.getDBUrl(), configReader.getDBUsername(), configReader.getDBPassword());
     }

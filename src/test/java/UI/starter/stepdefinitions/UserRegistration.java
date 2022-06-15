@@ -1,20 +1,21 @@
-package steps.UI;
+package UI.starter.stepdefinitions;
 
-import POM.HomePage;
-import POM.LoginPage;
-import POM.RegisterPage;
+import WebPages.HomePage;
+import WebPages.LoginPage;
+import WebPages.RegisterPage;
 import com.github.javafaker.Faker;
-import common.BaseClass;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 import java.util.List;
 import java.util.Map;
 
+import static net.serenitybdd.core.Serenity.getDriver;
 
-public class UserRegistration extends BaseClass {
 
+public class UserRegistration {
     private LoginPage loginPage;
     private RegisterPage registerPage;
     private String username;
@@ -22,10 +23,10 @@ public class UserRegistration extends BaseClass {
     HomePage homePage;
 
     public UserRegistration() {
-        loginPage = new LoginPage(webDriver);
-        registerPage = new RegisterPage(webDriver);
+        loginPage = new LoginPage(getDriver());
+        registerPage = new RegisterPage(getDriver());
         faker = new Faker();
-        homePage = new HomePage(webDriver);
+        homePage = new HomePage(getDriver());
 
     }
 

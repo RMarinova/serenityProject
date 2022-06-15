@@ -1,6 +1,6 @@
-package steps.REST;
+package REST.stepdefinitions;
 
-import common.RestActions;
+import REST.actions.RestActions;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

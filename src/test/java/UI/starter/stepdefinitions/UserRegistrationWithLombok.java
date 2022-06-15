@@ -1,11 +1,9 @@
-package steps.UI;
+package UI.starter.stepdefinitions;
 
-import POM.HomePage;
-import POM.RegisterPage;
-import POM.User;
-import POM.UserModel;
+import WebPages.HomePage;
+import WebPages.RegisterPage;
+import common.UserModel;
 import com.github.javafaker.Faker;
-import common.BaseClass;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,8 +11,9 @@ import io.cucumber.java.en.When;
 import java.util.List;
 import java.util.Map;
 
-public class UserRegistrationWithLombok extends BaseClass {
+import static net.serenitybdd.core.Serenity.getDriver;
 
+public class UserRegistrationWithLombok {
     private RegisterPage registerPage;
     private Faker faker;
     String email;
@@ -22,9 +21,9 @@ public class UserRegistrationWithLombok extends BaseClass {
 
     public UserRegistrationWithLombok() {
 
-        registerPage = new RegisterPage(webDriver);
+        registerPage = new RegisterPage(getDriver());
         faker = new Faker();
-        homePage = new HomePage(webDriver);
+        homePage = new HomePage(getDriver());
     }
 
 

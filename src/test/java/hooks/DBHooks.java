@@ -1,7 +1,7 @@
-package common.hooks;
+package hooks;
 
-import common.DBActions;
-import common.JDBCConnector;
+import DB.actions.DBActions;
+import DB.actions.JDBCConnector;
 import io.cucumber.java.After;
 
 import java.sql.SQLException;

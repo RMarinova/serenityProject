@@ -1,7 +1,5 @@
-package REST.common;
+package common;
 
-import POM.User;
-import POM.UserModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -19,7 +17,7 @@ public class DefaultUser {
         user.setTitle("Mr.");
         user.setFirst_name("Nikolay");
         user.setSir_name("Ivanov");
-        user.setEmail("niki@email.com");
+        user.setEmail("nitri4@email.com");
         user.setPassword("pass123");
         user.setCountry("BG");
         user.setCity("Sofia");
@@ -34,7 +32,7 @@ public class DefaultUser {
         userModel.setTitle("Mr.");
         userModel.setFirstName("Nikolay");
         userModel.setSirName("Ivanov");
-        userModel.setEmail("niki@email.com");
+        userModel.setEmail("niki12@emaill.com");
         userModel.setPassword("pass123");
         userModel.setCountry("BG");
         userModel.setCity("Sofia");

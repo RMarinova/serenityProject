@@ -1,16 +1,16 @@
-package steps.UI;
+package UI.starter.stepdefinitions;
 
-import POM.RegisterPage;
-import common.BaseClass;
+import WebPages.RegisterPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class RegistrationMandatoryField extends BaseClass {
+import static net.serenitybdd.core.Serenity.getDriver;
 
+public class RegistrationMandatoryField {
     RegisterPage registerPage;
     public RegistrationMandatoryField() {
 
-        this.registerPage = new RegisterPage(webDriver);
+        this.registerPage = new RegisterPage(getDriver());
     }
 
     @When("The following details are filled in with {string}, {string}, {string}, {string}, {string}, {string}, {string}")

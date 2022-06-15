@@ -1,14 +1,16 @@
-package steps.UI;
+package UI.starter.stepdefinitions;
 
-import POM.RegisterPage;
-import common.BaseClass;
+
+import WebPages.RegisterPage;
 import io.cucumber.java.en.Then;
 
-public class MandatoryTermsOfService extends BaseClass {
+import static net.serenitybdd.core.Serenity.getDriver;
+
+public class MandatoryTermsOfService {
     RegisterPage registerPage;
     public MandatoryTermsOfService() {
 
-        this.registerPage = new RegisterPage(webDriver);
+        this.registerPage = new RegisterPage(getDriver());
 
     }
 

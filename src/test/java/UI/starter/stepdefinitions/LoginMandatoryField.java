@@ -1,17 +1,17 @@
-package steps.UI;
+package UI.starter.stepdefinitions;
 
-import POM.LoginPage;
-import common.BaseClass;
+import WebPages.LoginPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class LoginMandatoryField extends BaseClass {
+import static net.serenitybdd.core.Serenity.getDriver;
+
+public class LoginMandatoryField {
 
     LoginPage loginPage;
-
     public LoginMandatoryField() {
 
-        this.loginPage = new LoginPage(webDriver);
+        this.loginPage = new LoginPage(getDriver());
     }
 
     @When("The following details are filled in: {string}, {string}")

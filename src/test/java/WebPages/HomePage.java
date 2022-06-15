@@ -1,4 +1,4 @@
-package POM;
+package WebPages;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -8,10 +8,9 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
-    WebDriver webDriver;
 
     public HomePage(WebDriver webDriver) {
-        PageFactory.initElements(webDriver,this);
+        PageFactory.initElements(webDriver, this);
     }
 
     @FindBy(xpath = "//a[@href=\"logout.php?logout\"]")
@@ -27,7 +26,6 @@ public class HomePage {
 
         loginBar.click();
         logoutButton.click();
-
     }
 
     public void ClickUsersButton() {

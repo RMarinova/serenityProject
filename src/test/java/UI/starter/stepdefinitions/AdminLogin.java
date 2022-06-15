@@ -1,16 +1,17 @@
-package steps.UI;
+package UI.starter.stepdefinitions;
 
-import POM.HomePage;
-import POM.LoginPage;
-import common.BaseClass;
-import dataProviders.ConfigReader;
+import Configuration.ConfigReader;
+import WebPages.HomePage;
+import WebPages.LoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import static net.serenitybdd.core.Serenity.getDriver;
 
-public class AdminLogin extends BaseClass {
+
+public class AdminLogin {
 
     private LoginPage loginPage;
     private HomePage homePage;
@@ -18,15 +19,15 @@ public class AdminLogin extends BaseClass {
     private ConfigReader configReader;
 
     public AdminLogin() {
-        homePage = new HomePage(webDriver);
-        loginPage = new LoginPage(webDriver);
+        homePage = new HomePage(getDriver());
+        loginPage = new LoginPage(getDriver());
         configReader = new ConfigReader();
 
     }
 
     @Given("The LogInPage is opened")
     public void theLogInPageIsOpened() {
-        webDriver.get(configReader.getApplicationUrl());
+        getDriver().get(configReader.getApplicationUrl());
     }
 
     @When("The username {string} is filled in")

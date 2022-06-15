@@ -1,4 +1,4 @@
-package common;
+package DB.actions;
 
 public class DBQueries {
 

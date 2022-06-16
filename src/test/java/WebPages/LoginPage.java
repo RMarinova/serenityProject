@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static net.serenitybdd.core.Serenity.getDriver;
-
 public class LoginPage {
     private WebDriver webDriver;
 

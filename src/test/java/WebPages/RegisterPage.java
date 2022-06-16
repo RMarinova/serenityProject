@@ -1,6 +1,6 @@
 package WebPages;
 
-import common.User;
+import REST.models.bussinesModels.UserModel;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +12,9 @@ import java.util.List;
 public class RegisterPage {
     private WebDriver webDriver;
 
-    private List<User>users=new ArrayList<>();
+    private List<UserModel>users=new ArrayList<>();
 
-    public void addUser(User user) {
+    public void addUser(UserModel user) {
 
         users.add(user);
     }

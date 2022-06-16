@@ -1,4 +1,4 @@
-package DB.actions;
+package DB.utils;
 
 
 import Configuration.ConfigReader;

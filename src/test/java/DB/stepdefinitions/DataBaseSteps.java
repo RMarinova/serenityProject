@@ -1,7 +1,7 @@
 package DB.stepdefinitions;
 
-import DB.actions.DBActions;
-import common.UserModel;
+import DB.utils.DBActions;
+import DB.utils.UserEntity;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -34,8 +34,8 @@ public class DataBaseSteps {
 
     @Then("I can receive the user using his email address")
     public void iCanSelectTheUserUsingHisEmailAddress() throws SQLException {
-        UserModel userModel = dbActions.settingUpUserWithEmail();
-        Assert.assertEquals("The user has not been created",userModel.getEmail(), dbActions.returningEmail());
+        UserEntity userEntity = dbActions.settingUpUserWithEmail();
+        Assert.assertEquals("The user has not been created",userEntity.getEmail(), dbActions.returningEmail());
     }
 
     @Given("A user is registered through the DataBase")
@@ -51,7 +51,7 @@ public class DataBaseSteps {
 
     @Then("all the users are displayed")
     public void allTheUsersAreDisplayed() {
-        List<UserModel> usersList = dbActions.returnUserModelList();
+        List<UserEntity> usersList = dbActions.returnUserModelList();
         Assert.assertTrue("The test has failed! Not all users are returned!", usersList.size() > 6);
     }
 
@@ -59,12 +59,12 @@ public class DataBaseSteps {
     public void iShouldReceiveTheUserSUpdatedInformation() throws SQLException {
 
 
-        UserModel userModel = dbActions.settingUpUserWithEmail();
+        UserEntity userEntity = dbActions.settingUpUserWithEmail();
 
         Assertions.assertAll(
-                () -> Assert.assertEquals("The email does not match!", userModel.getEmail(), dbActions.returningEmail()),
-                () -> Assert.assertEquals("The first name has not been updated!",userModel.getFirstName(), dbActions.returningFirstName()),
-                () -> Assert.assertEquals("The last name has not been updated!",userModel.getSirName(), dbActions.returningLastName())
+                () -> Assert.assertEquals("The email does not match!", userEntity.getEmail(), dbActions.returningEmail()),
+                () -> Assert.assertEquals("The first name has not been updated!",userEntity.getFirst_name(), dbActions.returningFirstName()),
+                () -> Assert.assertEquals("The last name has not been updated!",userEntity.getSir_name(), dbActions.returningLastName())
         );
 
     }
@@ -76,7 +76,7 @@ public class DataBaseSteps {
 
     @Then("I should not be able to select the user")
     public void iShouldNotBeAbleToSelectTheUser() throws SQLException {
-        UserModel userModel = dbActions.settingUpUserWithEmail();
-        Assert.assertNull("The user has not been deleted!",userModel.getEmail());
+        UserEntity userEntity = dbActions.settingUpUserWithEmail();
+        Assert.assertNull("The user has not been deleted!",userEntity.getEmail());
     }
 }

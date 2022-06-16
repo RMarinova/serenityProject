@@ -1,10 +1,10 @@
-package DB.actions;
+package DB.utils;
 
 public class DBQueries {
 
     public final String selectAll = "SELECT * FROM db.users;";
 
-    public String addNewUser(String id,String admin, String firstName, String sirName, String title, String country, String city, String email, String password){
+    public String addNewUser( String id, String admin, String firstName, String sirName, String title, String country, String city, String email, String password){
         String query = String.format("INSERT INTO db.users (id, is_admin, first_name, sir_name, title, country, city, email, password) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s');",
                 id,
                 admin,

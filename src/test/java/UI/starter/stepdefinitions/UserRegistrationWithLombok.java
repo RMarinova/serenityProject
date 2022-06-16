@@ -2,7 +2,7 @@ package UI.starter.stepdefinitions;
 
 import WebPages.HomePage;
 import WebPages.RegisterPage;
-import common.UserModel;
+import REST.models.bussinesModels.UserModel;
 import com.github.javafaker.Faker;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
@@ -33,9 +33,9 @@ public class UserRegistrationWithLombok {
         UserModel userModel = new UserModel();
         this.email = faker.internet().emailAddress();
 
-        userModel.setFirstName(data.get(0).get("firstName"));
+        userModel.setFirst_name(data.get(0).get("firstName"));
         userModel.setTitle(data.get(0).get("title"));
-        userModel.setSirName(data.get(0).get("sirName"));
+        userModel.setSir_name(data.get(0).get("sirName"));
         userModel.setEmail(email);
         userModel.setPassword(data.get(0).get("password"));
         userModel.setCountry(data.get(0).get("country"));
@@ -43,8 +43,8 @@ public class UserRegistrationWithLombok {
 
         registerPage.fillInRegistrationDetails(
                 userModel.getTitle(),
-                userModel.getFirstName(),
-                userModel.getSirName(),
+                userModel.getFirst_name(),
+                userModel.getSir_name(),
                 userModel.getEmail(),
                 userModel.getPassword(),
                 userModel.getCountry(),

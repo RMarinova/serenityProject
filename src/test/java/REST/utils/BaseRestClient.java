@@ -1,4 +1,4 @@
-package REST.actions;
+package REST.utils;
 
 import Configuration.ConfigReader;
 import io.restassured.response.Response;
@@ -9,8 +9,7 @@ public class BaseRestClient {
     private ConfigReader configReader;
     Response response;
 
-    public BaseRestClient(Response response){
-        this.response = response;
+    public BaseRestClient(){
         configReader = new ConfigReader();
     }
 
@@ -25,7 +24,7 @@ public class BaseRestClient {
                 .response();
     }
 
-    public Response postWithLombok(String path, String object){
+    public Response postWithLombok(String path, Object object){
         return given()
                 .header("Content-type", "application/json")
                 .and()

@@ -42,6 +42,11 @@ public class ConfigReader {
         else throw new RuntimeException("url not specified in the Configuration.properties file.");
     }
 
+    public String getUsersPath(){
+        String usersPath = properties.getProperty("api_users_path");
+        return usersPath;
+    }
+
     public String getDBUrl() {
         String url = properties.getProperty("database.local.url");
         if (url != null) return url;

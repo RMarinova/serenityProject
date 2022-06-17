@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class CreateUserResponse {
+
     private String title;
     private String first_name;
     private String sir_name;
@@ -11,6 +12,7 @@ public class CreateUserResponse {
     private String password;
     private String country;
     private String city;
-    private boolean is_admin;
+    private String is_admin;
     private String id;
+
 }

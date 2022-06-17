@@ -16,7 +16,7 @@ Feature: CRUD operations with REST
   Scenario: POST new user with REST and lombok
     When I use the following details with lombok
       | title | first_name | sir_name | email            | password | country  | city    | is_admin |
-      | Mr.   | Ivan       | Ivanov   | pr0r09@gmail.com | pass123  | Bulgaria | Plovdiv | 0        |
+      | Mr.   | Ivan       | Ivanov   | iiioo2@gmail.com | pass123  | Bulgaria | Plovdiv | 0        |
     And I perform a "POST" request to "/users" with lombok
     Then Status code "200" with a message "OK"
 
@@ -32,7 +32,7 @@ Feature: CRUD operations with REST
     Given A user is registered
     When I use the following details to update the user:
       | title | first_name | sir_name | country | city  | email          |
-      | Mr.   | Pesho     | Peshev  | BG      | Sofia | efef@gmail.com |
+      | Mr.   | Pesho      | Peshev   | BG      | Sofia | efef@gmail.com |
     And I perform a "PUT" request to "/users/"
     Then I should receive status code "200" with a message "OK"
 

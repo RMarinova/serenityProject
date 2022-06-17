@@ -7,7 +7,6 @@ import static io.restassured.RestAssured.given;
 
 public class BaseRestClient {
     private ConfigReader configReader;
-    Response response;
 
     public BaseRestClient(){
         configReader = new ConfigReader();
@@ -48,7 +47,7 @@ public class BaseRestClient {
                 .response();
     }
 
-    public Response putResponse(String id, String path, String body){
+    public Response putResponse(String id, String path, Object body){
         return  given()
                 .header("Content-type", "application/json")
                 .and()
@@ -60,5 +59,4 @@ public class BaseRestClient {
                 .extract()
                 .response();
     }
-
 }

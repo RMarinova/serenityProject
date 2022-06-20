@@ -17,7 +17,7 @@ Feature: CRUD operations with REST
     When I use the following details with lombok
       | title | first_name | sir_name | email            | password | country  | city    | is_admin |
       | Mr.   | Ivan       | Ivanov   | iiioo2@gmail.com | pass123  | Bulgaria | Plovdiv | 0        |
-    And I perform a "POST" request to "/users" with lombok
+    And I perform a "POST" request to "/users"
     Then Status code "200" with a message "OK"
 
 

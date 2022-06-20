@@ -23,7 +23,7 @@ public class BaseRestClient {
                 .response();
     }
 
-    public Response postWithLombok(String path, Object object){
+    public Response postResponse(String path, Object object){
         return given()
                 .header("Content-type", "application/json")
                 .and()

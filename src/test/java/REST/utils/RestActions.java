@@ -24,7 +24,7 @@ public class RestActions {
 
     }
 
-    public Response putResource(String path, Object body) {
+    private Response putResource(String path, Object body) {
 
         String id = Serenity.sessionVariableCalled(RestConstants.USER_ID);
         Response response = baseRestClient.putResponse(id, path, body);
@@ -59,18 +59,18 @@ public class RestActions {
         return user;
     }
 
-    public Response postResourceWithLombok(String path, Object body) {
+    private Response postResource(String path, Object body) {
 
 
-        Response response = baseRestClient.postWithLombok(path, body);
+        Response response = baseRestClient.postResponse(path, body);
         response.getBody().prettyPrint();
         return response;
     }
 
-    public Response creatingNewDefaultUser(){
+    public Response createNewDefaultUser(){
 
         var createUserRequest = DefaultUser.getDefaultUser();
-        Response response = baseRestClient.postWithLombok(configReader.getUsersPath(), createUserRequest);
+        Response response = baseRestClient.postResponse(configReader.getUsersPath(), createUserRequest);
         response.getBody().prettyPrint();
 
         return response;
@@ -82,8 +82,42 @@ public class RestActions {
         return createUserResponse.getId();
     }
 
-    public void deleteUser() {
-        baseRestClient.deleteResponse(Serenity.sessionVariableCalled(RestConstants.USER_ID));
-
+    public Response deleteUser() {
+        Response response = baseRestClient.deleteResponse(Serenity.sessionVariableCalled(RestConstants.USER_ID));
+        return response;
     }
+
+    public Response performRequestTo(String operation, String path, Object userModel){
+        Response response = null;
+
+        if (operation.equalsIgnoreCase(RestConstants.GET_REQUEST)) {
+
+            response = baseRestClient.getResponse(path);
+            return response;
+
+        } else if (operation.equalsIgnoreCase(RestConstants.POST_REQUEST)) {
+
+            userModel = Serenity.sessionVariableCalled(RestConstants.USER_MODEL);
+            response = postResource(path, userModel);
+
+            String newUserId = getNewUserId(response);
+            Serenity.setSessionVariable(RestConstants.USER_ID).to(newUserId);
+            return response;
+
+        } else if (operation.equalsIgnoreCase(RestConstants.DELETE_REQUEST)) {
+
+            response = deleteUser();
+            return response;
+
+        } else if (operation.equalsIgnoreCase(RestConstants.PUT_REQUEST)) {
+
+            userModel = Serenity.sessionVariableCalled(RestConstants.USER_MODEL);
+            response = putResource(path, userModel);
+            return response;
+        }
+        return response;
+    }
+
+
+
 }

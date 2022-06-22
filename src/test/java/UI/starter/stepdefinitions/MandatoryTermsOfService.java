@@ -1,23 +1,20 @@
 package UI.starter.stepdefinitions;
 
 
-import WebPages.RegisterPage;
+import UI.starter.stepsLibrary.UIStepsLibrary;
 import io.cucumber.java.en.Then;
-
-import static net.serenitybdd.core.Serenity.getDriver;
+import net.thucydides.core.annotations.Steps;
 
 public class MandatoryTermsOfService {
-    RegisterPage registerPage;
-    public MandatoryTermsOfService() {
 
-        this.registerPage = new RegisterPage(getDriver());
-
-    }
+    @Steps
+    UIStepsLibrary uiStepsLibrary;
 
     @Then("An error message is displayed")
     public void anErrorMessageIsDisplayed() throws InterruptedException {
 
-        registerPage.assertPopUpErrorMessage();
+        uiStepsLibrary.assertErrorMessageIsDisplayed();
+
     }
 
 }

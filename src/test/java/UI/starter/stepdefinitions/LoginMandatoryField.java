@@ -1,32 +1,26 @@
 package UI.starter.stepdefinitions;
 
-import WebPages.LoginPage;
+import UI.starter.stepsLibrary.UIStepsLibrary;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import static net.serenitybdd.core.Serenity.getDriver;
+import net.thucydides.core.annotations.Steps;
 
 public class LoginMandatoryField {
 
-    LoginPage loginPage;
-    public LoginMandatoryField() {
-
-        this.loginPage = new LoginPage(getDriver());
-    }
+   @Steps
+    UIStepsLibrary uiStepsLibrary;
 
     @When("The following details are filled in: {string}, {string}")
     public void theFollowingDetailsAreFilledInUserNamePassword(String userName, String password) {
 
-        loginPage.fillInUsername(userName);
-        loginPage.filInPassword(password);
+        uiStepsLibrary.fillInUserDetails(userName, password);
         
     }
 
     @Then("The error message is received")
     public void theErrorMessageIsReceived() throws InterruptedException {
 
+        uiStepsLibrary.assertLoginBtnIsPresent();
 
-
-        loginPage.assertLoginButtonIsPresent();
     }
 }

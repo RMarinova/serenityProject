@@ -40,7 +40,9 @@ public class HomePage {
     }
 
     public void assertUserIsLoggedIn(String username){
+
         Assert.assertTrue(loginBar.getText().toLowerCase().contains(username));
     }
+
 
 }

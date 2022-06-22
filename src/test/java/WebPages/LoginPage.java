@@ -11,10 +11,6 @@ public class LoginPage {
 
     WebDriver webDriver;
 
-    public LoginPage(WebDriver webDriver) {
-        PageFactory.initElements(webDriver, this);
-        this.webDriver = webDriver;
-    }
 
     @FindBy(xpath = "//input[@name=\"email\"]")
     WebElement userNameField;
@@ -28,6 +24,10 @@ public class LoginPage {
     @FindBy(xpath = "//a[@href=\"register.php\"]")
     WebElement registerBtn;
 
+    public LoginPage(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
+        this.webDriver = webDriver;
+    }
 
     public void fillInUsername(String username) {
         userNameField.clear();

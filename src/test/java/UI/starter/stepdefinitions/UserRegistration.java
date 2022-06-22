@@ -41,7 +41,7 @@ public class UserRegistration {
     public void theFollowingDetailsAreFilledInWithTitleFirstNameSirNameEmailPasswordCountryCity(DataTable table) throws InterruptedException {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
 
-            String email = faker.internet().emailAddress();
+        String email = faker.internet().emailAddress();
 
 
         String title = data.get(0).get("title");
@@ -59,19 +59,19 @@ public class UserRegistration {
     @And("I agree with the terms of service is clicked")
     public void iAgreeWithTheTermsOfServiceIsClicked() {
 
-        registerPage.termsCheckbox().click();
+        registerPage.clickTermsCheckbox();
     }
 
     @And("The register button is clicked on the register page")
     public void theRegisterButtonIsClickedAgain() {
 
-        registerPage.registerButton().click();
+        registerPage.clickRegisterBtn();
     }
 
     @Then("The user is registered successfully")
     public void theUserIsRegisteredSuccessfully() {
 
-        homePage.assertionLogin(username);
+//        homePage.assertionLogin(username);
     }
 
 }

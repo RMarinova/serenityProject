@@ -4,33 +4,34 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 public class UsersPage {
+
     WebDriver webDriver;
 
     public UsersPage(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
         this.webDriver = webDriver;
     }
 
-    public List<WebElement> emailFields() {
+    @FindBy(xpath = "//tr/td[6]")
+    List<WebElement> emailFields;
 
-        return webDriver.findElements(By.xpath("//tr/td[6]"));
+    @FindBy(xpath = "//tr/td[7]")
+    List<WebElement> deleteFields;
 
-    }
 
-    public List<WebElement> deleteFields() {
-
-        return webDriver.findElements(By.xpath("//tr/td[7]"));
-
-    }
+    /////////////////////////////////////////
 
     public void deleteUser(String userName) {
 
-        for (int i = 0; i <= emailFields().size() - 1; i++) {
-            if (emailFields().get(i).getText().contains(userName)) {
-                deleteFields().get(i).click();
+        for (int i = 0; i <= emailFields.size() -1; i++) {
+            if (emailFields.get(i).getText().contains(userName)) {
+                deleteFields.get(i).click();
                 break;
             }
         }
@@ -40,8 +41,8 @@ public class UsersPage {
 
     public void assertUserIsDeleted(String userName) {
         boolean present = false;
-        for (int i = 0; i <= emailFields().size() - 1; i++) {
-            if (emailFields().get(i).getText().contains(userName)) {
+        for (int i = 0; i <= emailFields.size() -1; i++) {
+            if (emailFields.get(i).getText().contains(userName)) {
                 present = true;
                 break;
             }

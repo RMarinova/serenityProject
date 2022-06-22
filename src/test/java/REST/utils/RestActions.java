@@ -33,11 +33,11 @@ public class RestActions {
 
     }
 
-    public void setAllUsersToBeDisplayed(Response response){
+    public void setAllUsersToBeDisplayed(Response response) {
         response.getBody().prettyPrint();
     }
 
-    public String[] getStatusLine(Response response){
+    public String[] getStatusLine(Response response) {
 
         String[] arrayOfStatusLine = response.statusLine().split("\\s+");
         System.out.println(arrayOfStatusLine[1] + " " + arrayOfStatusLine[2]);
@@ -49,10 +49,10 @@ public class RestActions {
 
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
         UserModel user = null;
+        ModelMapper modelMapper = new ModelMapper();
 
         for (int i = 0; i < data.size(); i++) {
 
-            ModelMapper modelMapper = new ModelMapper();
             user = modelMapper.map(data.get(i), UserModel.class);
         }
 
@@ -67,7 +67,7 @@ public class RestActions {
         return response;
     }
 
-    public Response createNewDefaultUser(){
+    public Response createNewDefaultUser() {
 
         var createUserRequest = DefaultUser.getDefaultUser();
         Response response = baseRestClient.postResponse(configReader.getUsersPath(), createUserRequest);
@@ -76,7 +76,7 @@ public class RestActions {
         return response;
     }
 
-    public String getNewUserId(Response response){
+    public String getNewUserId(Response response) {
 
         var createUserResponse = response.andReturn().getBody().as(CreateUserResponse.class);
         return createUserResponse.getId();
@@ -87,7 +87,7 @@ public class RestActions {
         return response;
     }
 
-    public Response performRequestTo(String operation, String path, Object userModel){
+    public Response performRequestTo(String operation, String path, Object userModel) {
         Response response = null;
 
         if (operation.equalsIgnoreCase(RestConstants.GET_REQUEST)) {
@@ -117,7 +117,6 @@ public class RestActions {
         }
         return response;
     }
-
 
 
 }

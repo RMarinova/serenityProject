@@ -5,6 +5,7 @@ import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.Serenity;
 import org.modelmapper.ModelMapper;
 
+import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,15 +14,9 @@ import java.util.Map;
 
 public class DBActions {
 
-    private ResultSet resultSet;
-    private UserEntity userEntity = new UserEntity();
-    private DefaultUser defaultUser = new DefaultUser();
+
     private DBQueries dbQueries = new DBQueries();
-    private List<UserEntity> usersList = new ArrayList<>();
     private JDBCConnector jdbcConnector;
-    private String email;
-    private String firstName;
-    private String lastName;
 
     {
         try {
@@ -32,84 +27,71 @@ public class DBActions {
 
     }
 
-
     public void getAllUsers() throws SQLException {
 
-        resultSet = jdbcConnector.getStatement().executeQuery(dbQueries.selectAll);
+        ResultSet resultSet = jdbcConnector.getStatement().executeQuery(dbQueries.selectAll);
+        UserEntity userEntity = new UserEntity();
+        settingUpUser(resultSet, userEntity);
 
-        settingUpUser(resultSet, userEntity, usersList);
     }
 
-    public void creatingNewUser(DataTable table) throws SQLException {
+    public String creatingNewUser(DataTable table) throws SQLException {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
 
         ModelMapper modelMapper = new ModelMapper();
-        UserEntity user = modelMapper.map(data.get(0), UserEntity.class);
+        UserEntity user = null;
+        for (int i = 0; i < data.size(); i++) {
+            user = modelMapper.map(data.get(0), UserEntity.class);
 
-        String query = dbQueries.addNewUser(
-                user.getId(),
-                user.getIs_admin(),
-                user.getFirst_name(),
-                user.getSir_name(),
-                user.getTitle(),
-                user.getCountry(),
-                user.getCity(),
-                user.getEmail(),
-                user.getPassword());
+            String query = dbQueries.addNewUser(
+                    user.getId(),
+                    user.getIs_admin(),
+                    user.getFirst_name(),
+                    user.getSir_name(),
+                    user.getTitle(),
+                    user.getCountry(),
+                    user.getCity(),
+                    user.getEmail(),
+                    user.getPassword());
 
-
-        this.email = user.getEmail();
-
-        Serenity.environmentVariables().setProperty("email", email);
-
-        jdbcConnector.getStatement().executeUpdate(query);
-
-    }
-
-    public UserEntity settingUpUserWithEmail() throws SQLException {
-        resultSet = jdbcConnector.getStatement().executeQuery(dbQueries.selectWithEmail(email));
-        while (resultSet.next()) {
-            userEntity.setTitle(resultSet.getString("title"));
-            userEntity.setFirst_name(resultSet.getString("first_name"));
-            userEntity.setSir_name(resultSet.getString("sir_name"));
-            userEntity.setEmail(resultSet.getString("email"));
-            userEntity.setPassword(resultSet.getString("password"));
-            userEntity.setCountry(resultSet.getString("country"));
-            userEntity.setCity(resultSet.getString("city"));
-            userEntity.setIs_admin(resultSet.getString("is_admin"));
-            userEntity.setId(resultSet.getString("id"));
-
-            usersList.add(userEntity);
-            System.out.println(userEntity);
-
+            jdbcConnector.getStatement().executeUpdate(query);
         }
-        return userEntity;
+        return user.getEmail();
     }
 
-    public String returningEmail() {
-        return email;
+    public UserEntity settingUpUserWithEmail(String email) throws SQLException {
+
+        ResultSet resultSet = jdbcConnector.getStatement().executeQuery(dbQueries.selectWithEmail(email));
+        UserEntity userEntity = new UserEntity();
+        settingUpUser(resultSet, userEntity);
+
+        return Serenity.sessionVariableCalled(DBConstants.USER);
     }
 
-    public String returningFirstName() {
-        return firstName;
+    private void settingUpUser(ResultSet result, UserEntity user) throws SQLException {
+        List<UserEntity> usersList = new ArrayList<>();
+        while (result.next()) {
+            user.setTitle(result.getString(DBConstants.USER_TITLE));
+            user.setFirst_name(result.getString(DBConstants.USER_FIRST_NAME));
+            user.setSir_name(result.getString(DBConstants.USER_SIR_NAME));
+            user.setEmail(result.getString(DBConstants.USER_EMAIL));
+            user.setPassword(result.getString(DBConstants.USER_PASSWORD));
+            user.setCountry(result.getString(DBConstants.USER_COUNTRY));
+            user.setCity(result.getString(DBConstants.USER_CITY));
+            user.setIs_admin(result.getString(DBConstants.USER_IS_ADMIN));
+            user.setId(result.getString(DBConstants.USER_ID));
+
+            System.out.println(user);
+            usersList.add(user);
+        }
+        Serenity.setSessionVariable(DBConstants.USERS_LIST).to(usersList);
+        Serenity.setSessionVariable(DBConstants.USER).to(user);
+
     }
 
-    public String returningLastName() {
-        return lastName;
-    }
+    public String creatingNewDefaultUser() throws SQLException {
 
-    public List<UserEntity> returnUserModelList() {
-        return usersList;
-    }
-
-    public void deleteUser() throws SQLException {
-
-        jdbcConnector.getStatement().executeUpdate(dbQueries.deleteUser(Serenity.environmentVariables().getProperty("email")));
-
-    }
-
-    public void creatingNewDefaultUser() throws SQLException {
-
+        DefaultUser defaultUser = new DefaultUser();
         UserEntity user = defaultUser.createUserWithDB();
 
         String query = dbQueries.addNewUser(
@@ -123,37 +105,20 @@ public class DBActions {
                 user.getEmail(),
                 user.getPassword());
 
-        this.email = user.getEmail();
-        Serenity.environmentVariables().setProperty("email", email);
-
         jdbcConnector.getStatement().executeUpdate(query);
+        return user.getEmail();
     }
 
-    public void updateUserDetails(String firstName, String lastName) throws SQLException {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public void updateUserDetails(String firstName, String lastName, String email) throws SQLException {
         String query = dbQueries.updateFirstAndLastName(firstName, lastName, email);
         jdbcConnector.getStatement().executeUpdate(query);
     }
 
 
-    private void settingUpUser(ResultSet result, UserEntity user, List<UserEntity> userEntityList) throws SQLException {
+    public void deleteUser() throws SQLException {
 
-        while (result.next()) {
-            user.setTitle(result.getString("title"));
-            user.setFirst_name(result.getString("first_name"));
-            user.setSir_name(result.getString("sir_name"));
-            user.setEmail(result.getString("email"));
-            user.setPassword(result.getString("password"));
-            user.setCountry(result.getString("country"));
-            user.setCity(result.getString("city"));
-            user.setIs_admin(result.getString("is_admin"));
-            user.setId(result.getString("id"));
+        jdbcConnector.getStatement().executeUpdate(dbQueries.deleteUser(Serenity.sessionVariableCalled(DBConstants.EMAIL)));
 
-            userEntityList.add(user);
-            System.out.println(user);
-        }
     }
-
 
 }

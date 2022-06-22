@@ -9,8 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
+    WebDriver webDriver;
+
     public HomePage(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
+        this.webDriver = webDriver;
     }
 
     @FindBy(xpath = "//a[@href=\"logout.php?logout\"]")
@@ -21,6 +24,9 @@ public class HomePage {
 
     @FindBy(xpath = "//*[text()=\"Users\"]")
     WebElement usersButton;
+
+
+    ////////////////////////////////////////////////////////////////////////////////
 
     public void logoutFromAccount() {
 
@@ -33,8 +39,8 @@ public class HomePage {
         usersButton.click();
     }
 
-    public void assertionLogin(String text) {
-
-        Assert.assertTrue(loginBar.getText().toLowerCase().contains(text));
+    public void assertUserIsLoggedIn(String username){
+        Assert.assertTrue(loginBar.getText().toLowerCase().contains(username));
     }
+
 }

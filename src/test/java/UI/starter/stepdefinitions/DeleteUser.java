@@ -49,8 +49,8 @@ public class DeleteUser {
         this.userName = email;
 
         registerPage.fillInRegistrationDetails(title, firstName, sirName, email, password, country, city);
-        registerPage.termsCheckbox().click();
-        registerPage.registerButton().click();
+        registerPage.clickTermsCheckbox();
+        registerPage.clickRegisterBtn();
     }
 
     @And("I logout from the the account")

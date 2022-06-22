@@ -9,7 +9,7 @@ Feature: Tests with DataBase
   Scenario: Successfully create a new user
     When I create a new user with the following information:
       | id | is_admin | firstName | sirName | title | country  | city    | email         | password |
-      | 0  | 0        | Datcho     | Basov    | Mr.   | Bulgaria | Plovdiv | aabb@email.com | pass123  |
+      | 0  | 0        | Datcho     | Basov    | Mr.   | Bulgaria | Plovdiv | aabb2@email.com | pass123  |
     Then I can receive the user using his email address
 
   @DeleteUser

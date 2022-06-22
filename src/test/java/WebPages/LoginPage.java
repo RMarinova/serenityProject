@@ -4,45 +4,40 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
-    private WebDriver webDriver;
 
+    WebDriver webDriver;
 
     public LoginPage(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
         this.webDriver = webDriver;
-
     }
 
-    public WebElement userNameField() {
+    @FindBy(xpath = "//input[@name=\"email\"]")
+    WebElement userNameField;
 
-        return webDriver.findElement(By.xpath("//input[@name=\"email\"]"));
-    }
+    @FindBy(xpath = "//input[@name=\"pass\"]")
+    WebElement passwordField;
 
-    public WebElement passwordField() {
+    @FindBy(xpath = "//button[@name=\"btn-login\"]")
+    WebElement loginBtn;
 
-        return webDriver.findElement(By.xpath("//input[@name=\"pass\"]"));
-    }
+    @FindBy(xpath = "//a[@href=\"register.php\"]")
+    WebElement registerBtn;
 
-    public WebElement logInButton() {
-
-        return webDriver.findElement(By.xpath("//button[@name=\"btn-login\"]"));
-    }
-
-    public WebElement registerButton() {
-
-        return webDriver.findElement(By.xpath("//a[@href=\"register.php\"]"));
-    }
 
     public void fillInUsername(String username) {
-        userNameField().clear();
-        userNameField().sendKeys(username);
+        userNameField.clear();
+        userNameField.sendKeys(username);
     }
 
     public void filInPassword(String password) {
 
-        passwordField().clear();
-        passwordField().sendKeys(password);
+        passwordField.clear();
+        passwordField.sendKeys(password);
     }
 
     public void retryClick(WebElement element) {
@@ -68,19 +63,18 @@ public class LoginPage {
 
     public void clickLoginButton() {
 
-        retryClick(logInButton());
+        retryClick(loginBtn);
     }
 
 
     public void clickRegisterButton() {
 
-        retryClick(registerButton());
+        retryClick(registerBtn);
     }
 
     public void assertLoginButtonIsPresent() throws InterruptedException {
 
-        Thread.sleep(3000);
-
-        Assert.assertTrue(logInButton().isDisplayed());
+        Thread.sleep(2000);
+        Assert.assertTrue(loginBtn.isDisplayed());
     }
 }

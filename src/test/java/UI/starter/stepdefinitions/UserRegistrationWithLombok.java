@@ -54,6 +54,6 @@ public class UserRegistrationWithLombok {
     @Then("The user is registered successfully with lombok")
     public void theUserIsRegisteredSuccessfullyWithLombok() {
 
-        homePage.assertionLogin(email);
+//        homePage.assertionLogin(email);
     }
 }

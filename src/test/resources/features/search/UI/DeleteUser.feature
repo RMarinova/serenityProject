@@ -6,7 +6,7 @@ Feature: Deletion of the user
     And The register button is clicked
     And A user is registered with the following details
       | title | firstName | sirName | email             | password | country  | city    |
-      | Mr.   | Marin     | Marinov | marin02.m@email.com | pass123  | Bulgaria | Plovdiv |
+      | Mr.   | Marin     | Marinov | marin05.m@email.com | pass123  | Bulgaria | Plovdiv |
     And I logout from the the account
     When I login with the following admin details: "admin@automation.com" and "pass123"
     And I click on the Users on the admin page

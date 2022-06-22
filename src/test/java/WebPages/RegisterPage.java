@@ -1,121 +1,95 @@
 package WebPages;
 
-import REST.models.bussinesModels.UserModel;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPage {
-    private WebDriver webDriver;
 
-    private List<UserModel>users=new ArrayList<>();
 
-    public void addUser(UserModel user) {
-
-        users.add(user);
-    }
+    WebDriver webDriver;
 
     public RegisterPage(WebDriver webDriver) {
-
+        PageFactory.initElements(webDriver, this);
         this.webDriver = webDriver;
     }
 
-    public WebElement firstNameField() {
+    @FindBy(xpath = "//input[@name=\"first_name\"]")
+    WebElement firstNameField;
 
-        return webDriver.findElement(By.xpath("//input[@name=\"first_name\"]"));
-    }
+    @FindBy(xpath = "//input[@value=\"Mr.\"]")
+    WebElement titleMrRadioBtn;
 
-    private WebElement titleMrRadioButton() {
+    @FindBy(xpath = "//input[@value=\"Mrs.\"]")
+    WebElement titleMrsRadioBtn;
 
-        return webDriver.findElement(By.xpath("//input[@value=\"Mr.\"]"));
-    }
+    @FindBy(xpath = "//input[@name=\"sir_name\"]")
+    WebElement sirNameField;
 
-    private WebElement titleMrsRadioButton() {
+    @FindBy(xpath = "//input[@name=\"email\"]")
+    WebElement emailField;
 
-        return webDriver.findElement(By.xpath("//input[@value=\"Mrs.\"]"));
-    }
+    @FindBy(xpath = "//input[@name=\"pass\"]")
+    WebElement passwordField;
 
-    public WebElement sirNameField() {
+    @FindBy(xpath = "//input[@name=\"country\"]")
+    WebElement countryField;
 
-        return webDriver.findElement(By.xpath("//input[@name=\"sir_name\"]"));
-    }
+    @FindBy(xpath = "//input[@name=\"city\"]")
+    WebElement cityField;
 
-    public WebElement emailField() {
+    @FindBy(xpath = "//input[@id=\"TOS\"]")
+    WebElement termsCheckbox;
 
-        return webDriver.findElement(By.xpath("//input[@name=\"email\"]"));
-    }
+    @FindBy(name = "signup")
+    WebElement registerBtn;
 
-    public WebElement passwordField() {
+    /////////////////////////////////////////////////////////////////////////////////
 
-        return webDriver.findElement(By.xpath("//input[@name=\"pass\"]"));
-    }
-
-    public WebElement countryField() {
-
-        return webDriver.findElement(By.xpath("//input[@name=\"country\"]"));
-    }
-
-    public WebElement cityField() {
-
-        return webDriver.findElement(By.xpath("//input[@name=\"city\"]"));
-    }
-
-    public WebElement termsCheckbox() {
-
-        return webDriver.findElement(By.xpath("//input[@id=\"TOS\"]"));
-    }
-
-    public WebElement registerButton() {
-
-        return webDriver.findElement(By.name("signup"));
-    }
-
-    public void clickRadioButton(String text) {
+    private void clickRadioButton(String text) {
 
         if (text.equalsIgnoreCase("Mr.")) {
 
-            titleMrRadioButton().click();
-        } else titleMrsRadioButton().click();
+            titleMrRadioBtn.click();
+        } else titleMrsRadioBtn.click();
     }
 
-    public void fillInFirstName(String text) {
+    private void fillInFirstName(String text) {
 
-        firstNameField().clear();
-        firstNameField().sendKeys(text);
+        firstNameField.clear();
+        firstNameField.sendKeys(text);
     }
 
-    public void fillInSirName(String text) {
+    private void fillInSirName(String text) {
 
-        sirNameField().clear();
-        sirNameField().sendKeys(text);
+        sirNameField.clear();
+        sirNameField.sendKeys(text);
     }
 
-    public void fillInEmail(String text) {
+    private void fillInEmail(String text) {
 
-        emailField().clear();
-        emailField().sendKeys(text);
+        emailField.clear();
+        emailField.sendKeys(text);
     }
 
-    public void fillInPassword(String text) {
+    private void fillInPassword(String text) {
 
-        passwordField().clear();
-        passwordField().sendKeys(text);
+        passwordField.clear();
+        passwordField.sendKeys(text);
     }
 
-    public void fillInCountry(String text) {
+    private void fillInCountry(String text) {
 
-        countryField().clear();
-        countryField().sendKeys(text);
+        countryField.clear();
+        countryField.sendKeys(text);
     }
 
-    public void fillInCity(String text) {
+    private void fillInCity(String text) {
 
-        cityField().clear();
-        cityField().sendKeys(text);
+        cityField.clear();
+        cityField.sendKeys(text);
     }
 
     public void fillInRegistrationDetails(String title, String firstName, String sirName, String email, String password, String country, String city) {
@@ -131,8 +105,8 @@ public class RegisterPage {
 
     public void assertRegisterButtonIsPresent() throws InterruptedException {
 
-        Thread.sleep(3000);
-        Assert.assertTrue(registerButton().isDisplayed());
+        Thread.sleep(2000);
+        Assert.assertTrue(registerBtn.isDisplayed());
     }
 
     public void assertPopUpErrorMessage() throws InterruptedException {
@@ -144,4 +118,17 @@ public class RegisterPage {
 
         Assert.assertEquals(PopUpMessage, ExpectedMessage);
     }
+
+    public void clickTermsCheckbox(){
+        termsCheckbox.click();
+    }
+
+    public void clickRegisterBtn(){
+        registerBtn.click();
+    }
+
+//    public void addUser(UserModel user) {
+//
+//        users.add(user);
+//    }
 }

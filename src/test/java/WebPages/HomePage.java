@@ -9,12 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
-    WebDriver webDriver;
-
-    public HomePage(WebDriver webDriver) {
-        PageFactory.initElements(webDriver, this);
-        this.webDriver = webDriver;
-    }
 
     @FindBy(xpath = "//a[@href=\"logout.php?logout\"]")
     WebElement logoutButton;
@@ -25,8 +19,18 @@ public class HomePage {
     @FindBy(xpath = "//*[text()=\"Users\"]")
     WebElement usersButton;
 
+    public HomePage(WebDriver webDriver) {
+
+        PageFactory.initElements(webDriver, this);
+
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////
+
+    public WebElement getLoginBarElement(){
+        return loginBar;
+    }
 
     public void logoutFromAccount() {
 

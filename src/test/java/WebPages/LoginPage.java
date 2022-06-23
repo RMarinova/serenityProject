@@ -1,7 +1,6 @@
 package WebPages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,7 +49,7 @@ public class LoginPage {
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
                 try {
-                    Thread.sleep(1000);
+                    wait(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -72,9 +71,19 @@ public class LoginPage {
         retryClick(registerBtn);
     }
 
-    public void assertLoginButtonIsPresent() throws InterruptedException {
+    public void assertUserIsNotLoggedIn(WebElement loginBar) {
 
-        Thread.sleep(2000);
-        Assert.assertTrue(loginBtn.isDisplayed());
+        var isElementDisplayed = false;
+
+        try {
+            loginBar.isDisplayed();
+            isElementDisplayed = true;
+        } catch (Exception exception){
+
+        }
+        Assert.assertFalse("The login was successful!", isElementDisplayed);
+
     }
+
 }
+

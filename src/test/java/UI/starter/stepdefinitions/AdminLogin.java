@@ -1,6 +1,6 @@
 package UI.starter.stepdefinitions;
 
-import UI.starter.stepsLibrary.UIStepsLibrary;
+import UI.starter.stepsLibrary.AdminLoginSteps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,36 +11,40 @@ import net.thucydides.core.annotations.Steps;
 public class AdminLogin {
 
   @Steps
-    UIStepsLibrary uiStepsLibrary;
+  AdminLoginSteps adminLoginSteps;
 
     @Given("The LogInPage is opened")
     public void theLogInPageIsOpened() {
 
-      uiStepsLibrary.openHomePage();
+      adminLoginSteps.openHomePage();
 
     }
 
     @When("The username {string} is filled in")
     public void theUsernameIsFilledIn(String username) {
 
-        uiStepsLibrary.usernameIsFilledIn(username);
+      adminLoginSteps.usernameIsFilledIn(username);
+
     }
 
     @And("the password {string} is filled in")
     public void thePasswordIsFilledIn(String password) {
 
-        uiStepsLibrary.passwordIsFilledIn(password);
+      adminLoginSteps.passwordIsFilledIn(password);
+
     }
 
     @And("the login button is clicked")
     public void theLoginButtonIsClicked() {
 
-        uiStepsLibrary.clickLoginBtn();
+      adminLoginSteps.clickLoginBtn();
+
     }
 
     @Then("User is logged successfully")
     public void userIsLoggedSuccessfully() {
 
-        uiStepsLibrary.assertUserIsLoggedIn();
+      adminLoginSteps.assertUserIsLoggedIn();
+
     }
 }

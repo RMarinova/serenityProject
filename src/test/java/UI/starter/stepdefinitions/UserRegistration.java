@@ -1,6 +1,7 @@
 package UI.starter.stepdefinitions;
 
-import UI.starter.stepsLibrary.UIStepsLibrary;
+import UI.starter.stepsLibrary.AdminLoginSteps;
+import UI.starter.stepsLibrary.UserRegistrationSteps;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -11,41 +12,44 @@ import net.thucydides.core.annotations.Steps;
 public class UserRegistration {
 
     @Steps
-    UIStepsLibrary uiStepsLibrary;
+    UserRegistrationSteps userRegistrationSteps;
+
+    @Steps
+    AdminLoginSteps adminLoginSteps;
 
     @And("The register button is clicked")
     public void theRegisterButtonIsClicked() {
 
-        uiStepsLibrary.clickRegisterBtn();
+        userRegistrationSteps.clickRegisterBtn();
 
     }
 
     @When("The following details are filled in with the following details but the terms of service are not clicked")
     @When("The following details are filled in with")
-    public void theFollowingDetailsAreFilledInWithTitleFirstNameSirNameEmailPasswordCountryCity(DataTable table) throws InterruptedException {
+    public void theFollowingDetailsAreFilledInWithTitleFirstNameSirNameEmailPasswordCountryCity(DataTable table) {
 
-        uiStepsLibrary.fillingInRegistrationDetails(table);
+        userRegistrationSteps.fillingInRegistrationDetails(table);
 
     }
 
     @And("I agree with the terms of service is clicked")
     public void iAgreeWithTheTermsOfServiceIsClicked() {
 
-        uiStepsLibrary.clickTermsCheckbox();
+        userRegistrationSteps.clickTermsCheckbox();
 
     }
 
     @And("The register button is clicked on the register page")
     public void theRegisterButtonIsClickedAgain() {
 
-        uiStepsLibrary.clickSignUpBtn();
+        userRegistrationSteps.clickSignUpBtn();
 
     }
 
     @Then("The user is registered successfully")
     public void theUserIsRegisteredSuccessfully() {
 
-        uiStepsLibrary.assertUserIsLoggedIn();
+        adminLoginSteps.assertUserIsLoggedIn();
 
     }
 

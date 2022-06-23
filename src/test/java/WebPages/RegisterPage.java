@@ -8,14 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPage {
 
-
-    WebDriver webDriver;
-
-    public RegisterPage(WebDriver webDriver) {
-        PageFactory.initElements(webDriver, this);
-        this.webDriver = webDriver;
-    }
-
     @FindBy(xpath = "//input[@name=\"first_name\"]")
     WebElement firstNameField;
 
@@ -45,6 +37,13 @@ public class RegisterPage {
 
     @FindBy(name = "signup")
     WebElement registerBtn;
+
+    WebDriver webDriver;
+
+    public RegisterPage(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
+        this.webDriver = webDriver;
+    }
 
     /////////////////////////////////////////////////////////////////////////////////
 
@@ -103,32 +102,26 @@ public class RegisterPage {
         fillInCity(city);
     }
 
-    public void assertRegisterButtonIsPresent() throws InterruptedException {
+    public void assertPopUpErrorMessage() {
 
-        Thread.sleep(2000);
-        Assert.assertTrue(registerBtn.isDisplayed());
-    }
-
-    public void assertPopUpErrorMessage() throws InterruptedException {
-
-        Thread.sleep(1000);
         String PopUpMessage = webDriver.switchTo().alert().getText();
         webDriver.switchTo().alert().accept();
         String ExpectedMessage = "You must agree with terms of service";
 
         Assert.assertEquals(PopUpMessage, ExpectedMessage);
+
     }
 
     public void clickTermsCheckbox(){
+
         termsCheckbox.click();
+
     }
 
     public void clickRegisterBtn(){
+
         registerBtn.click();
+
     }
 
-//    public void addUser(UserModel user) {
-//
-//        users.add(user);
-//    }
 }

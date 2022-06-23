@@ -11,19 +11,19 @@ import java.util.List;
 
 public class UsersPage {
 
-    WebDriver webDriver;
-
-    public UsersPage(WebDriver webDriver) {
-        PageFactory.initElements(webDriver, this);
-        this.webDriver = webDriver;
-    }
-
     @FindBy(xpath = "//tr/td[6]")
     List<WebElement> emailFields;
 
     @FindBy(xpath = "//tr/td[7]")
     List<WebElement> deleteFields;
 
+    WebDriver webDriver;
+
+
+    public UsersPage(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
+        this.webDriver = webDriver;
+    }
 
     /////////////////////////////////////////
 
